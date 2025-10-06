@@ -24,8 +24,6 @@ Successfully implemented a comprehensive packages system for Toorizo travel webs
   - Destination overview with highlights
   - Three detailed package cards with:
     - Package features and inclusions
-    - Pricing information
-    - Duration details
     - "Book This Package" buttons
 
 ## Updated Navigation
@@ -64,8 +62,6 @@ Successfully implemented a comprehensive packages system for Toorizo travel webs
   - Supports parameters:
     - `destination` - destination name
     - `package` - package type (Honeymoon/Family/Group)
-    - `duration` - package duration
-    - `price` - price range
     - `inquiry` - inquiry type (custom, etc.)
   - Auto-generates relevant messages based on parameters
   - Updates subject field based on inquiry type

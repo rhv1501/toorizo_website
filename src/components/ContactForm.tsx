@@ -23,7 +23,6 @@ const ContactForm = () => {
   useEffect(() => {
     const destination = searchParams.get("destination");
     const packageType = searchParams.get("package");
-    const duration = searchParams.get("duration");
     const inquiry = searchParams.get("inquiry");
 
     if (destination || packageType) {
@@ -33,7 +32,6 @@ const ContactForm = () => {
         message = `I am interested in a custom package for ${destination}. Please provide me with a personalized quote and itinerary based on my preferences.`;
       } else if (packageType && destination) {
         message = `I am interested in the ${packageType} for ${destination}.`;
-        if (duration) message += ` Duration: ${duration}.`;
         message +=
           " Please provide more details and help me with the booking process.";
       } else if (destination) {

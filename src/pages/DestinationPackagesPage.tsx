@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import SectionTitle from "../components/SectionTitle";
-import { Heart, Users, Car, Calendar, MapPin, Phone, Star } from "lucide-react";
+import { Heart, Users, Car, MapPin, Phone, Star } from "lucide-react";
 
 const DestinationPackagesPage = () => {
   const { destination } = useParams<{ destination: string }>();
@@ -120,7 +120,6 @@ const DestinationPackagesPage = () => {
       id: "honeymoon",
       title: "Honeymoon Package",
       icon: <Heart className="h-6 w-6" />,
-      duration: "3-5 Days",
       description: `Romantic ${currentDestination.name} getaway designed for couples`,
       features: [
         "Romantic candlelight dinner",
@@ -142,7 +141,6 @@ const DestinationPackagesPage = () => {
       id: "family",
       title: "Family Package",
       icon: <Users className="h-6 w-6" />,
-      duration: "4-6 Days",
       description: `Perfect family vacation to explore ${currentDestination.name} together`,
       features: [
         "Family-friendly accommodations",
@@ -164,7 +162,6 @@ const DestinationPackagesPage = () => {
       id: "group",
       title: "Group Package (10+ People)",
       icon: <Car className="h-6 w-6" />,
-      duration: "3-7 Days",
       description: `Special group rates for ${currentDestination.name} with customized itineraries`,
       features: [
         "Group discount up to 20%",
@@ -242,10 +239,6 @@ const DestinationPackagesPage = () => {
                   </div>
                   <div>
                     <h3 className="text-2xl font-playfair">{pkg.title}</h3>
-                    <div className="flex items-center text-sm text-gray-600 mt-1">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      {pkg.duration}
-                    </div>
                   </div>
                 </div>
 
@@ -284,9 +277,7 @@ const DestinationPackagesPage = () => {
                 <Link
                   to={`/contact-us?destination=${encodeURIComponent(
                     currentDestination.fullName
-                  )}&package=${encodeURIComponent(
-                    pkg.title
-                  )}&duration=${encodeURIComponent(pkg.duration)}`}
+                  )}&package=${encodeURIComponent(pkg.title)}`}
                   className="w-full bg-toorizo-gold text-white py-3 px-6 rounded-lg font-medium text-center hover:bg-toorizo-gold/90 transition-colors duration-300 block"
                 >
                   Book This Package
