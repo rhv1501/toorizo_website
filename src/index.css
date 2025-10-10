@@ -183,6 +183,20 @@
     color: #d4af37;
   }
 
+  .nav-link-mobile {
+    @apply uppercase text-sm tracking-wider transition-all duration-300 py-2 text-toorizo-dark;
+    text-shadow: none;
+  }
+
+  .nav-link-mobile:hover {
+    color: #d4af37;
+    text-shadow: none;
+  }
+
+  .nav-link-mobile.text-toorizo-gold {
+    text-shadow: none;
+  }
+
   .story-link {
     @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 
     after:h-0.5 after:bottom-0 after:left-0 after:bg-toorizo-gold after:origin-bottom-right 

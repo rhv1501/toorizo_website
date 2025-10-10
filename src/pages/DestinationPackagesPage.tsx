@@ -201,28 +201,6 @@ const DestinationPackagesPage = () => {
         </div>
       </section>
 
-      {/* Destination Overview */}
-      <section className="section-padding bg-white">
-        <div className="toorizo-container">
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <SectionTitle>About {currentDestination.name}</SectionTitle>
-            <p className="text-lg text-gray-600 mb-8">
-              {currentDestination.description}
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              {currentDestination.highlights.map((highlight, index) => (
-                <span
-                  key={index}
-                  className="bg-toorizo-gold/10 text-toorizo-gold px-4 py-2 rounded-full text-sm font-medium"
-                >
-                  {highlight}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Packages Grid */}
       <section className="section-padding bg-toorizo-cream">
         <div className="toorizo-container">
@@ -284,6 +262,28 @@ const DestinationPackagesPage = () => {
                 </Link>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Destination Overview */}
+      <section className="section-padding bg-white">
+        <div className="toorizo-container">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <SectionTitle>About {currentDestination.name}</SectionTitle>
+            <p className="text-lg text-gray-600 mb-8">
+              {currentDestination.description}
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              {currentDestination.highlights.map((highlight, index) => (
+                <span
+                  key={index}
+                  className="bg-toorizo-gold/10 text-toorizo-gold px-4 py-2 rounded-full text-sm font-medium"
+                >
+                  {highlight}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>

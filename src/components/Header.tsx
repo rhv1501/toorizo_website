@@ -98,14 +98,11 @@ const Header = () => {
           {/* Mobile Menu Toggle */}
           <div className="flex-shrink-0 ml-auto md:hidden">
             <button
-              className={`hover:text-yellow-400 ${
-                isScrolled ? "text-toorizo-gold" : "text-white"
+              className={`p-2 rounded-md hover:text-toorizo-gold hover:bg-white/10 transition-all duration-300 ${
+                isScrolled
+                  ? "text-toorizo-gold bg-toorizo-cream/30"
+                  : "text-white bg-black/20 backdrop-blur-sm"
               }`}
-              style={{
-                filter: isScrolled
-                  ? "none"
-                  : "drop-shadow(1px 1px 2px rgba(0,0,0,0.8))",
-              }}
               onClick={toggleMenu}
               aria-label="Toggle Menu"
             >
@@ -119,8 +116,12 @@ const Header = () => {
       <div
         className={`
           fixed inset-0 z-[10000] md:hidden 
-          transition-opacity duration-300
-          ${isOpen ? "bg-black/40 opacity-100 visible" : "opacity-0 invisible"}
+          transition-opacity duration-300 ease-out
+          ${
+            isOpen
+              ? "bg-black/30 backdrop-blur-sm opacity-100 visible"
+              : "opacity-0 invisible"
+          }
         `}
         onClick={closeMenu}
         aria-hidden="true"
@@ -130,13 +131,14 @@ const Header = () => {
       {/* Mobile Slide-in Navbar */}
       <div
         className={`
-          fixed top-0 left-0 h-full w-64 bg-white z-[10001] md:hidden shadow-lg
-          transition-transform duration-300
+          fixed top-0 left-0 h-full w-64 bg-white z-[10001] md:hidden shadow-2xl
+          transition-transform duration-300 ease-out
           ${isOpen ? "translate-x-0" : "-translate-x-full"}
-          flex flex-col pt-7
+          flex flex-col pt-7 border-r border-gray-100
         `}
         style={{
           transitionProperty: "transform",
+          boxShadow: "4px 0 20px rgba(0, 0, 0, 0.1)",
         }}
       >
         <button
@@ -164,7 +166,7 @@ const Header = () => {
                 trackMetaEvent("NavClick", { path: link.path });
                 closeMenu();
               }}
-              className={`nav-link text-lg text-toorizo-dark ${
+              className={`nav-link-mobile text-lg ${
                 location.pathname === link.path ? "text-toorizo-gold" : ""
               }`}
             >

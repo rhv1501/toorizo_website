@@ -18,7 +18,7 @@ Toorizo is a modern, responsive travel website built with React and TypeScript, 
 ### 📦 **Package System**
 
 - **3 Package Types**: Honeymoon, Family, and Group (10+ people)
-- **Detailed Information**: Features, inclusions, duration for each package
+- **Detailed Information**: Features and inclusions for each package
 - **Smart Navigation**: Seamless flow from destinations to packages to contact
 - **No Pricing Display**: Focus on experience quality over cost
 
@@ -139,16 +139,14 @@ const { destination } = useParams();
 
 ### **Intelligent Form Prefilling**
 
-```typescript
+````typescript
 // URL parameter-based form prefilling
-/contact-us?destination=Ooty&package=Honeymoon%20Package&duration=3-5%20Days
+/contact-us?destination=Ooty&package=Honeymoon%20Package
 
 // Automatic message generation
-"I am interested in the Honeymoon Package for Ooty. Duration: 3-5 Days.
+"I am interested in the Honeymoon Package for Ooty.
 Please provide more details and help me with the booking process."
-```
-
-### **Performance Optimization**
+```### **Performance Optimization**
 
 - **Code Splitting**: Pages lazy loaded for optimal performance
 - **Chunk Optimization**: Vendor dependencies split into logical chunks
@@ -166,7 +164,7 @@ manualChunks: {
   'ui-vendor': ['@radix-ui/*', 'lucide-react'],
   'utils-vendor': ['clsx', 'tailwind-merge', 'class-variance-authority']
 }
-```
+````
 
 ### **Tailwind Customization**
 
