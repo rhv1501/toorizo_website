@@ -258,11 +258,11 @@ const AboutUsPage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center px-4">
               <Link
-                to="/plan-journey"
+                to="/destinations"
                 className="w-full sm:w-auto group bg-toorizo-gold hover:bg-white text-toorizo-dark hover:text-toorizo-dark px-6 py-3 md:px-8 md:py-4 rounded-xl md:rounded-2xl font-semibold text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg md:shadow-xl hover:shadow-xl md:hover:shadow-2xl"
               >
                 <span className="flex items-center justify-center">
-                  Plan Your Journey
+                  Destinations
                   <svg
                     className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300"
                     fill="none"
