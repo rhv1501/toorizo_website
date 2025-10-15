@@ -181,6 +181,12 @@ const PlanJourneyPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Show a loading toast
+    toast({
+      title: "Submitting your journey plan...",
+      description: "Please wait while we process your information.",
+    });
+
     try {
       await submitJourneyForm({
         destination: formData.destination,
@@ -195,9 +201,9 @@ const PlanJourneyPage = () => {
       });
 
       // GTM event for journey form submission
-      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      if (typeof window !== "undefined" && (window as any).dataLayer) {
         (window as any).dataLayer.push({
-          event: 'journey_form_submit',
+          event: "journey_form_submit",
           name: formData.name,
           email: formData.email,
           page_path: window.location.pathname,
@@ -208,13 +214,17 @@ const PlanJourneyPage = () => {
       trackConversion();
 
       // Meta Pixel event
-      trackMetaEvent('Lead', {form: 'journey'});
+      trackMetaEvent("Lead", { form: "journey" });
 
+      // Clear the loading toast and show success toast
       toast({
-        title: "Journey plan submitted!",
+        title: "Journey plan submitted successfully! ✅",
         description: "We'll contact you soon to discuss your travel plans.",
+        variant: "default",
+        duration: 5000, // Show for 5 seconds
       });
 
+      // Reset form data
       setFormData({
         destination: "not-sure",
         travelDate: new Date(),
@@ -232,9 +242,11 @@ const PlanJourneyPage = () => {
     } catch (error) {
       console.error("Error submitting journey form:", error);
       toast({
-        title: "Error",
-        description: "Failed to submit your journey plan. Please try again.",
+        title: "Submission Failed ❌",
+        description:
+          "We couldn't process your journey plan. Please try again or contact us directly.",
         variant: "destructive",
+        duration: 7000, // Show for 7 seconds
       });
     } finally {
       setIsSubmitting(false);
@@ -558,8 +570,35 @@ const PlanJourneyPage = () => {
                 <Button
                   type="submit"
                   className="w-full bg-[#71203F] hover:bg-[#571232]"
+                  disabled={isSubmitting}
                 >
-                  Submit Your Journey Plan
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center">
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Submitting...
+                    </span>
+                  ) : (
+                    "Submit Your Journey Plan"
+                  )}
                 </Button>
               </div>
 

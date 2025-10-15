@@ -124,7 +124,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <Link
-                  to="/destinations"
+                  to="/packages/ooty"
                   className="text-gray-300 hover:text-toorizo-gold transition-colors"
                 >
                   Ooty
@@ -132,7 +132,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/destinations"
+                  to="/packages/coorg"
                   className="text-gray-300 hover:text-toorizo-gold transition-colors"
                 >
                   Coorg
@@ -140,7 +140,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/destinations"
+                  to="/packages/kodaikanal"
                   className="text-gray-300 hover:text-toorizo-gold transition-colors"
                 >
                   Kodaikanal
@@ -148,7 +148,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/destinations"
+                  to="/packages/chikmagalur"
                   className="text-gray-300 hover:text-toorizo-gold transition-colors"
                 >
                   Chikmagalur
@@ -156,7 +156,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/destinations"
+                  to="/packages/wayanad"
                   className="text-gray-300 hover:text-toorizo-gold transition-colors"
                 >
                   Wayanad
@@ -164,7 +164,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/destinations"
+                  to="/packages/mysore"
                   className="text-gray-300 hover:text-toorizo-gold transition-colors"
                 >
                   Mysore
