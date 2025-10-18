@@ -298,13 +298,13 @@ const DestinationPackagesPage = () => {
 
                       <div className="flex-grow">
                         <div
-                          className="mt-2 mb-2 flex items-center justify-center bg-white rounded-lg"
+                          className="mt-2 mb-2 flex items-center justify-center rounded-lg"
                           style={{ height: "220px" }}
                         >
                           <img
                             src={pkg.imageSrc}
                             alt={pkg.title}
-                            className="max-w-[95%] max-h-[95%] object-contain rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                            className="max-w-[95%] max-h-[95%] object-contain hover:shadow-md transition-shadow rounded-xl"
                             style={{ objectFit: "contain" }}
                           />
                         </div>
