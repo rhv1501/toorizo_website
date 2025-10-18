@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import HeroCarousel from "../components/HeroCarousel";
 import SectionTitle from "../components/SectionTitle";
 import ContactForm from "../components/ContactForm";
+import TrustIndicators from "../components/TrustIndicators";
 
 const ContactUsPage = () => {
   // Hero carousel slides
@@ -21,12 +22,18 @@ const ContactUsPage = () => {
       {/* Contact Section */}
       <section className="section-padding toorizo-container pt-24">
         <SectionTitle>Contact Us</SectionTitle>
-        <p className="text-center text-gray-600 max-w-3xl mx-auto mb-12">
+        <p className="text-center text-gray-600 max-w-3xl mx-auto mb-8">
           Have questions about our services or ready to start planning your next
           adventure? Our travel experts are here to help. Fill out the form
           below, and we'll get back to you shortly.
         </p>
-        <ContactForm />
+
+        {/* Trust Indicators */}
+        <TrustIndicators />
+
+        <div className="-mt-2">
+          <ContactForm />
+        </div>
       </section>
 
       {/* FAQ Section */}

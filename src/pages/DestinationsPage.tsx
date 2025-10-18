@@ -4,6 +4,7 @@ import SectionTitle from "../components/SectionTitle";
 import BentoGrid from "../components/BentoGrid";
 import BlogCard from "../components/BlogCard";
 import { Link, useNavigate } from "react-router-dom";
+import TrustIndicators from "../components/TrustIndicators";
 
 const DestinationsPage = () => {
   // South Indian destinations for the bento grid
@@ -100,7 +101,10 @@ const DestinationsPage = () => {
       {/* Destinations Section */}
       <section className="section-padding toorizo-container">
         <SectionTitle>Explore Our Destinations</SectionTitle>
-
+        {/* Trust Indicators */}
+        <div className="mb-8">
+          <TrustIndicators />
+        </div>{" "}
         {/* South Indian Destinations */}
         <div className="mb-12">
           <h2 className="text-2xl font-playfair mb-6 text-center">
@@ -132,7 +136,6 @@ const DestinationsPage = () => {
             </div>
           </div>
         </div>
-
         {/* North India Destinations */}
         <div>
           <h2 className="text-2xl font-playfair mb-6 text-center">

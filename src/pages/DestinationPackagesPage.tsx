@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import SectionTitle from "../components/SectionTitle";
+import TrustIndicators from "../components/TrustIndicators";
 import {
   Heart,
   Users,
@@ -252,6 +253,10 @@ const DestinationPackagesPage = () => {
       <section className="section-padding bg-toorizo-cream">
         <div className="toorizo-container">
           <SectionTitle>Available Packages</SectionTitle>
+          {/* Trust Indicators */}
+          <div className="mb-8">
+            <TrustIndicators background="bg-white/50" />
+          </div>{" "}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {packages.map((pkg) => {
               const packageLink = `/contact-us?destination=${encodeURIComponent(
