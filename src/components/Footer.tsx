@@ -170,6 +170,14 @@ const Footer = () => {
                   Mysore
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/packages/shillong"
+                  className="text-gray-300 hover:text-toorizo-gold transition-colors"
+                >
+                  Shillong
+                </Link>
+              </li>
             </ul>
           </div>
 

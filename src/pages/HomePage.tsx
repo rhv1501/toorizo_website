@@ -102,6 +102,13 @@ const HomePage = () => {
       span: "col-span-1",
     },
     {
+      title: "Shillong",
+      image:
+        "https://images.pexels.com/photos/7626303/pexels-photo-7626303.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      link: "/packages/shillong",
+      span: "col-span-2",
+    },
+    {
       title: "Mudumalai Tiger Reserve",
       image: mudumalai,
       link: "/contact-us",
@@ -143,14 +150,6 @@ const HomePage = () => {
       author: "Amit & Meera Patel",
       location: "Bangalore, India",
       rating: 5,
-    },
-    {
-      id: 3,
-      quote:
-        "As a solo traveler, I was looking for a safe yet adventure-filled trip. Toorizo delivered exactly that with my tour of Ooty. The attention to detail and personalized itinerary made all the difference.",
-      author: "Rajesh Khanna",
-      location: "Hyderabad, India",
-      rating: 4,
     },
     {
       id: 4,
@@ -298,11 +297,11 @@ const HomePage = () => {
                   <button
                     onClick={() => {
                       setShowNorthModal(false);
-                      navigate("/contact-us");
+                      navigate(`/packages/${loc.toLowerCase()}`);
                     }}
                     className="bg-toorizo-gold text-white font-semibold py-1.5 px-3 rounded-md text-xs"
                   >
-                    Know More
+                    View Packages
                   </button>
                 </div>
               ))}

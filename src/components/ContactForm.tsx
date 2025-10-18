@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { submitContactForm } from "@/services/formService";
 import { toast } from "sonner";
@@ -17,6 +17,10 @@ const ContactForm = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errors, setErrors] = useState({
+    email: false,
+    phone: false,
+  });
   const navigate = useNavigate();
 
   // Effect to prefill form from URL parameters
@@ -65,22 +69,47 @@ const ContactForm = () => {
       ...prev,
       [name]: value,
     }));
+
+    // Validate email and phone as user types
+    if (name === "email") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      setErrors((prev) => ({
+        ...prev,
+        email: !emailRegex.test(value) && value !== "",
+      }));
+    }
+
+    if (name === "phone") {
+      const phoneRegex = /^\d{10,11}$/;
+      setErrors((prev) => ({
+        ...prev,
+        phone: !phoneRegex.test(value) && value !== "",
+      }));
+    }
   };
+
+  // Check if the form is valid and complete
+  const isFormValid = useMemo(() => {
+    const { name, email, phone, message } = formData;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const phoneRegex = /^\d{10,11}$/;
+
+    return (
+      name.trim() !== "" &&
+      email.trim() !== "" &&
+      emailRegex.test(email) &&
+      phone.trim() !== "" &&
+      phoneRegex.test(phone) &&
+      message.trim() !== ""
+    );
+  }, [formData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Basic validations
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    const phoneRegex = /^\d{10,11}$/;
-
-    if (!emailRegex.test(formData.email)) {
-      toast.error("Enter a Valid Email");
-      return;
-    }
-
-    if (!phoneRegex.test(formData.phone)) {
-      toast.error("Enter a Valid mobile number");
+    // Check if form is valid before proceeding
+    if (!isFormValid) {
+      toast.error("Please fill all required fields correctly");
       return;
     }
 
@@ -196,8 +225,15 @@ const ContactForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-toorizo-gold focus:border-transparent"
+                className={`w-full px-4 py-2 border ${
+                  errors.email ? "border-red-500" : "border-gray-300"
+                } rounded-md focus:outline-none focus:ring-2 focus:ring-toorizo-gold focus:border-transparent`}
               />
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">
+                  Please enter a valid email address
+                </p>
+              )}
             </div>
           </div>
 
@@ -226,8 +262,15 @@ const ContactForm = () => {
                 onInput={(e) =>
                   (e.target as HTMLInputElement).setCustomValidity("")
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-toorizo-gold focus:border-transparent"
+                className={`w-full px-4 py-2 border ${
+                  errors.phone ? "border-red-500" : "border-gray-300"
+                } rounded-md focus:outline-none focus:ring-2 focus:ring-toorizo-gold focus:border-transparent`}
               />
+              {errors.phone && (
+                <p className="text-red-500 text-xs mt-1">
+                  Please enter a valid 10-11 digit phone number
+                </p>
+              )}
             </div>
 
             <div>
@@ -295,14 +338,24 @@ const ContactForm = () => {
             ></textarea>
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center relative">
             <button
               type="submit"
-              disabled={isSubmitting}
-              className="btn-primary w-full md:w-auto"
+              disabled={isSubmitting || !isFormValid}
+              className={`w-full md:w-auto py-3 px-6 rounded-md font-medium transition-all duration-300 uppercase tracking-wider text-sm 
+                ${
+                  isSubmitting || !isFormValid
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "btn-primary hover:bg-toorizo-gold/90"
+                }`}
             >
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>
+            {!isFormValid && !isSubmitting && (
+              <p className="text-amber-500 text-xs mt-2">
+                Please fill all required fields correctly to submit
+              </p>
+            )}
           </div>
         </form>
       )}

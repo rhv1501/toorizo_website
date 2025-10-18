@@ -52,6 +52,17 @@ const DestinationsPage = () => {
     },
   ];
 
+  // North Indian destinations
+  const northIndianDestinations = [
+    {
+      title: "Shillong, Meghalaya",
+      image:
+        "https://images.pexels.com/photos/7626303/pexels-photo-7626303.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      link: "/packages/shillong",
+      size: "small" as const,
+    },
+  ];
+
   // Blog posts moved from HomePage
   const blogPosts = [
     {
@@ -81,37 +92,76 @@ const DestinationsPage = () => {
       {/* Hero Section */}
       <HeroVideo
         title="Discover Magnificent Destinations"
-        subtitle="Explore South India's most breathtaking locations with Toorizo"
+        subtitle="Explore breathtaking locations across South India and North India with Toorizo"
         videoSrc="/destinations.mp4"
         fullHeight={false}
       />
 
-      {/* South Indian Destinations Section */}
+      {/* Destinations Section */}
       <section className="section-padding toorizo-container">
-        <SectionTitle>Explore South India</SectionTitle>
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {southIndianDestinations.map((destination, index) => (
-              <Link
-                to={destination.link}
-                key={index}
-                className="group overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={destination.image}
-                    alt={destination.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-40 transition-opacity"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <h3 className="text-white text-xl font-playfair text-center px-4 z-10">
-                      {destination.title}
-                    </h3>
+        <SectionTitle>Explore Our Destinations</SectionTitle>
+
+        {/* South Indian Destinations */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-playfair mb-6 text-center">
+            South India
+          </h2>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {southIndianDestinations.map((destination, index) => (
+                <Link
+                  to={destination.link}
+                  key={index}
+                  className="group overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={destination.image}
+                      alt={destination.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-40 transition-opacity"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <h3 className="text-white text-xl font-playfair text-center px-4 z-10">
+                        {destination.title}
+                      </h3>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* North India Destinations */}
+        <div>
+          <h2 className="text-2xl font-playfair mb-6 text-center">
+            North India
+          </h2>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {northIndianDestinations.map((destination, index) => (
+                <Link
+                  to={destination.link}
+                  key={index}
+                  className="group overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={destination.image}
+                      alt={destination.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-40 transition-opacity"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <h3 className="text-white text-xl font-playfair text-center px-4 z-10">
+                        {destination.title}
+                      </h3>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>

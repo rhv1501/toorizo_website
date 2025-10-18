@@ -1,10 +1,41 @@
 import { useParams, Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import SectionTitle from "../components/SectionTitle";
-import { Heart, Users, Car, MapPin, Phone, Star } from "lucide-react";
+import {
+  Heart,
+  Users,
+  Car,
+  MapPin,
+  Phone,
+  Star,
+  ChevronRight,
+  CheckCircle,
+  Check,
+  Landmark,
+  Mountain,
+} from "lucide-react";
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const DestinationPackagesPage = () => {
   const { destination } = useParams<{ destination: string }>();
+  interface Package {
+    id: string;
+    title: string;
+    icon: JSX.Element;
+    description: string;
+    features: string[];
+    inclusions: string[];
+    color: string;
+  }
+
+  const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
 
   const destinationData = {
     ooty: {
@@ -97,6 +128,21 @@ const DestinationPackagesPage = () => {
         "Devaraja Market",
       ],
     },
+    shillong: {
+      name: "Shillong",
+      fullName: "Shillong, Meghalaya",
+      image:
+        "https://images.pexels.com/photos/7626303/pexels-photo-7626303.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      description:
+        "Known as the 'Scotland of the East', Shillong captivates visitors with its rolling hills, pine forests, and vibrant culture of the Khasi people.",
+      highlights: [
+        "Umiam Lake",
+        "Elephant Falls",
+        "Ward's Lake",
+        "Don Bosco Museum",
+        "Shillong Peak",
+      ],
+    },
   };
 
   const currentDestination =
@@ -115,6 +161,7 @@ const DestinationPackagesPage = () => {
     );
   }
 
+  // Define packages that apply to all destinations
   const packages = [
     {
       id: "honeymoon",
@@ -205,63 +252,78 @@ const DestinationPackagesPage = () => {
       <section className="section-padding bg-toorizo-cream">
         <div className="toorizo-container">
           <SectionTitle>Available Packages</SectionTitle>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {packages.map((pkg) => (
-              <div
-                key={pkg.id}
-                className={`p-8 rounded-xl border-2 transition-all duration-300 ${pkg.color} h-full flex flex-col`}
-              >
-                <div className="flex items-center mb-6">
-                  <div className="p-3 bg-white rounded-full shadow-lg mr-4">
-                    {pkg.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-playfair">{pkg.title}</h3>
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {packages.map((pkg) => {
+              const packageLink = `/contact-us?destination=${encodeURIComponent(
+                currentDestination.fullName
+              )}&package=${encodeURIComponent(pkg.title)}`;
 
-                <div className="mb-6">
-                  <p className="text-gray-600">{pkg.description}</p>
-                </div>
+              return (
+                <div key={pkg.id} className="group h-full relative">
+                  <div
+                    className={`p-4 rounded-xl border-2 transition-all duration-300 ${pkg.color} h-full flex flex-col relative overflow-hidden group-hover:shadow-lg`}
+                  >
+                    {/* Hover overlay for visual feedback */}
+                    <div className="absolute inset-0 bg-toorizo-gold/0 group-hover:bg-toorizo-gold/5 transition-colors duration-300"></div>
 
-                <div className="mb-6 flex-grow">
-                  <h4 className="font-semibold mb-3">Package Features:</h4>
-                  <ul className="space-y-2 mb-6">
-                    {pkg.features.map((feature, index) => (
-                      <li
-                        key={index}
-                        className="flex items-start text-sm text-gray-700"
+                    {/* Card header */}
+                    <div className="flex items-center mb-3 relative z-10">
+                      <div className="p-2 bg-white rounded-full shadow-md mr-3">
+                        {pkg.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-playfair">{pkg.title}</h3>
+                      </div>
+                    </div>
+
+                    {/* Card body - wrapped in Link */}
+                    <Link
+                      to={packageLink}
+                      className="block flex-grow relative z-10 mb-3"
+                    >
+                      <div className="mb-2">
+                        <p className="text-gray-600 text-xs">
+                          {pkg.description}
+                        </p>
+                      </div>
+
+                      <div className="flex-grow">
+                        <h4 className="font-medium text-sm mb-1.5">
+                          Top Features:
+                        </h4>
+                        <ul className="grid grid-cols-2 gap-x-2 gap-y-1">
+                          {pkg.features.slice(0, 6).map((feature, index) => (
+                            <li
+                              key={index}
+                              className="flex items-start text-xs text-gray-700"
+                            >
+                              <Star className="h-2.5 w-2.5 text-toorizo-gold mr-1 mt-0.5 flex-shrink-0" />
+                              <span className="line-clamp-1">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </Link>
+
+                    {/* Card actions */}
+                    <div className="flex gap-2 relative z-10">
+                      <Link
+                        to={packageLink}
+                        className="flex-grow bg-toorizo-gold text-white py-2 px-4 rounded-lg font-medium text-center hover:bg-toorizo-gold/90 transition-colors duration-300 text-sm"
                       >
-                        <Star className="h-3 w-3 text-toorizo-gold mr-2 mt-1 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <h4 className="font-semibold mb-3">Inclusions:</h4>
-                  <ul className="space-y-2">
-                    {pkg.inclusions.map((inclusion, index) => (
-                      <li
-                        key={index}
-                        className="flex items-start text-sm text-gray-700"
+                        Book This Package
+                      </Link>
+                      <button
+                        className="bg-white border-2 border-toorizo-gold text-toorizo-gold py-2 px-4 rounded-lg font-medium text-center hover:bg-toorizo-cream transition-colors duration-300 text-sm"
+                        onClick={() => setSelectedPackage(pkg)}
                       >
-                        <div className="w-2 h-2 bg-toorizo-gold rounded-full mr-3 mt-2 flex-shrink-0"></div>
-                        {inclusion}
-                      </li>
-                    ))}
-                  </ul>
+                        View All
+                      </button>
+                    </div>
+                  </div>
                 </div>
-
-                <Link
-                  to={`/contact-us?destination=${encodeURIComponent(
-                    currentDestination.fullName
-                  )}&package=${encodeURIComponent(pkg.title)}`}
-                  className="w-full bg-toorizo-gold text-white py-3 px-6 rounded-lg font-medium text-center hover:bg-toorizo-gold/90 transition-colors duration-300 block"
-                >
-                  Book This Package
-                </Link>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -317,6 +379,83 @@ const DestinationPackagesPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Package Details Dialog */}
+      <Dialog
+        open={!!selectedPackage}
+        onOpenChange={(open) => !open && setSelectedPackage(null)}
+      >
+        <DialogContent className="sm:max-w-[500px] max-h-[80vh] overflow-y-auto">
+          {selectedPackage && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="flex items-center text-2xl font-playfair">
+                  <div className="p-2 bg-white rounded-full shadow-md mr-3 border border-gray-200">
+                    {selectedPackage.icon}
+                  </div>
+                  {selectedPackage.title}
+                </DialogTitle>
+              </DialogHeader>
+
+              <div className="mt-4">
+                <p className="text-gray-600">{selectedPackage.description}</p>
+                <div className="mt-6">
+                  <h4 className="font-semibold mb-3 text-lg">
+                    Package Features:
+                  </h4>
+                  <ul className="space-y-2 mb-6">
+                    {selectedPackage.features.map(
+                      (feature: string, index: number) => (
+                        <li
+                          key={index}
+                          className="flex items-start text-gray-700"
+                        >
+                          <Star className="h-4 w-4 text-toorizo-gold mr-2 mt-1 flex-shrink-0" />
+                          {feature}
+                        </li>
+                      )
+                    )}
+                  </ul>
+
+                  <div className="bg-toorizo-cream/40 p-4 rounded-lg border-l-4 border-toorizo-gold">
+                    <h4 className="font-semibold mb-3 text-lg flex items-center">
+                      <CheckCircle className="h-5 w-5 text-toorizo-gold mr-2" />
+                      Package Inclusions:
+                    </h4>
+                    <ul className="space-y-2 mb-2">
+                      {selectedPackage.inclusions.map(
+                        (inclusion: string, index: number) => (
+                          <li
+                            key={index}
+                            className="flex items-start text-gray-700"
+                          >
+                            <Check className="h-4 w-4 text-toorizo-gold mr-2 mt-1 flex-shrink-0" />
+                            {inclusion}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                </div>{" "}
+                <div className="mt-6">
+                  <p className="text-sm text-gray-600 italic mb-3 text-center">
+                    All inclusions are covered in the package price. No hidden
+                    charges!
+                  </p>
+                  <Link
+                    to={`/contact-us?destination=${encodeURIComponent(
+                      currentDestination.fullName
+                    )}&package=${encodeURIComponent(selectedPackage.title)}`}
+                    className="w-full bg-toorizo-gold text-white py-3 px-6 rounded-lg font-medium text-center hover:bg-toorizo-gold/90 transition-colors duration-300 block"
+                  >
+                    Book This Package
+                  </Link>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 };
