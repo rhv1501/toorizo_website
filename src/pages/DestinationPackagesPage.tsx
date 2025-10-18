@@ -33,6 +33,7 @@ const DestinationPackagesPage = () => {
     description: string;
     features: string[];
     inclusions: string[];
+    imageSrc: string;
     color: string;
   }
 
@@ -166,9 +167,10 @@ const DestinationPackagesPage = () => {
   const packages = [
     {
       id: "honeymoon",
-      title: "Honeymoon Package",
+      title: "Couple/Honeymoon Package",
       icon: <Heart className="h-6 w-6" />,
       description: `Romantic ${currentDestination.name} getaway designed for couples`,
+      imageSrc: "/Packages/couple.jpeg",
       features: [
         "Romantic candlelight dinner",
         "Couples spa treatment",
@@ -190,6 +192,7 @@ const DestinationPackagesPage = () => {
       title: "Family Package",
       icon: <Users className="h-6 w-6" />,
       description: `Perfect family vacation to explore ${currentDestination.name} together`,
+      imageSrc: "/Packages/Family.jpeg",
       features: [
         "Family-friendly accommodations",
         "Kid-friendly activity planning",
@@ -211,6 +214,7 @@ const DestinationPackagesPage = () => {
       title: "Group Package (10+ People)",
       icon: <Car className="h-6 w-6" />,
       description: `Special group rates for ${currentDestination.name} with customized itineraries`,
+      imageSrc: "/Packages/private group.jpeg",
       features: [
         "Group discount up to 20%",
         "Dedicated tour coordinator",
@@ -254,9 +258,9 @@ const DestinationPackagesPage = () => {
         <div className="toorizo-container">
           <SectionTitle>Available Packages</SectionTitle>
           {/* Trust Indicators */}
-          <div className="mb-8">
+          <div className="mb-4">
             <TrustIndicators background="bg-white/50" />
-          </div>{" "}
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {packages.map((pkg) => {
               const packageLink = `/contact-us?destination=${encodeURIComponent(
@@ -293,20 +297,17 @@ const DestinationPackagesPage = () => {
                       </div>
 
                       <div className="flex-grow">
-                        <h4 className="font-medium text-sm mb-1.5">
-                          Top Features:
-                        </h4>
-                        <ul className="grid grid-cols-2 gap-x-2 gap-y-1">
-                          {pkg.features.slice(0, 6).map((feature, index) => (
-                            <li
-                              key={index}
-                              className="flex items-start text-xs text-gray-700"
-                            >
-                              <Star className="h-2.5 w-2.5 text-toorizo-gold mr-1 mt-0.5 flex-shrink-0" />
-                              <span className="line-clamp-1">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
+                        <div
+                          className="mt-2 mb-2 flex items-center justify-center bg-white rounded-lg"
+                          style={{ height: "220px" }}
+                        >
+                          <img
+                            src={pkg.imageSrc}
+                            alt={pkg.title}
+                            className="max-w-[95%] max-h-[95%] object-contain rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                            style={{ objectFit: "contain" }}
+                          />
+                        </div>
                       </div>
                     </Link>
 
@@ -319,10 +320,10 @@ const DestinationPackagesPage = () => {
                         Book This Package
                       </Link>
                       <button
-                        className="bg-white border-2 border-toorizo-gold text-toorizo-gold py-2 px-4 rounded-lg font-medium text-center hover:bg-toorizo-cream transition-colors duration-300 text-sm"
+                        className="bg-white text-toorizo-gold py-2 px-4 rounded-lg font-medium border border-toorizo-gold hover:bg-toorizo-cream/30 transition-colors duration-300 text-sm"
                         onClick={() => setSelectedPackage(pkg)}
                       >
-                        View All
+                        View Details
                       </button>
                     </div>
                   </div>
