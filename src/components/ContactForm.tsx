@@ -213,33 +213,6 @@ const ContactForm = () => {
 
             <div>
               <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className={`w-full px-4 py-2 border ${
-                  errors.email ? "border-red-500" : "border-gray-300"
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-toorizo-gold focus:border-transparent`}
-              />
-              {errors.email && (
-                <p className="text-red-500 text-xs mt-1">
-                  Please enter a valid email address
-                </p>
-              )}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
@@ -269,6 +242,33 @@ const ContactForm = () => {
               {errors.phone && (
                 <p className="text-red-500 text-xs mt-1">
                   Please enter a valid 10-11 digit phone number
+                </p>
+              )}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className={`w-full px-4 py-2 border ${
+                  errors.email ? "border-red-500" : "border-gray-300"
+                } rounded-md focus:outline-none focus:ring-2 focus:ring-toorizo-gold focus:border-transparent`}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">
+                  Please enter a valid email address
                 </p>
               )}
             </div>

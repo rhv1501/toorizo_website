@@ -2,7 +2,7 @@
 import { trackMetaEvent } from "@/utils/gtm";
 
 const WHATSAPP_LINK =
-  "https://wa.me/919940415750?text=Hi%2C%20I%20am%20interested%20in%20your%20tour%20package";
+  "https://wa.me/918148815750?text=Hi%2C%20I%20am%20interested%20in%20your%20tour%20package";
 
 const FloatingContactButton = () => {
   const handleWhatsAppClick = () => {
