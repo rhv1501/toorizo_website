@@ -195,12 +195,12 @@ const Footer = () => {
               <li className="flex items-center">
                 <Phone className="mr-3 text-toorizo-gold" size={18} />
                 <a
-                  href="https://wa.me/919940415750?text=Hi%2C%20I%20am%20interested%20in%20your%20tour%20package"
+                  href="https://wa.me/918148815750?text=Hi%2C%20I%20am%20interested%20in%20your%20tour%20package"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-toorizo-gold transition-colors"
                 >
-                  +91 9940415750
+                  +91 8148815750
                 </a>
               </li>
               <li className="flex items-center">
