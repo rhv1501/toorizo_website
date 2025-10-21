@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { submitChatMessage } from "@/services/formService";
 import { toast } from "sonner";
-import { trackConversion, trackMetaEvent } from "@/utils/gtm";
+import { trackMetaEvent } from "@/utils/gtm";
 
 const ChatButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,20 +36,17 @@ const ChatButton = () => {
     try {
       await submitChatMessage(form);
       // GTM event for chat form submission
-      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      if (typeof window !== "undefined" && (window as any).dataLayer) {
         (window as any).dataLayer.push({
-          event: 'chat_form_submit',
+          event: "chat_form_submit",
           name: form.name,
           email: form.email,
           page_path: window.location.pathname,
         });
       }
-      
-      // Track Google Ads conversion
-      trackConversion();
 
       // Meta Pixel event
-      trackMetaEvent('Lead', {form: 'chat_button'});
+      trackMetaEvent("Lead", { form: "chat_button" });
       toast.success("Message sent successfully!");
       setForm({ name: "", email: "", phone: "", message: "" });
       setIsOpen(false); // Close modal after submit

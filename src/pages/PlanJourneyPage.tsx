@@ -210,9 +210,6 @@ const PlanJourneyPage = () => {
         });
       }
 
-      // Track Google Ads conversion
-      trackConversion();
-
       // Meta Pixel event
       trackMetaEvent("Lead", { form: "journey" });
 

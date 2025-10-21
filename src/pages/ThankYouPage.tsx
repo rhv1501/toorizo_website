@@ -1,13 +1,21 @@
 import Layout from "../components/Layout";
-
 import { useEffect } from "react";
-import { gtmEvent, trackConversion } from "../utils/gtm";
+import { trackMetaEvent } from "../utils/gtm";
 
 const ThankYouPage = () => {
-  // Trigger Google Ads conversion and GTM page view when the Thank You page loads
+  // Thank you page view tracking (no Google Ads conversion here; click-based conversion fired on submit button)
   useEffect(() => {
-    trackConversion();
-    gtmEvent("thank_you_page_view");
+    // Track page view in GTM and Meta Pixel
+    // Note: This fires a separate Lead event with different parameters than the form submission
+    if (typeof window !== "undefined" && window.dataLayer) {
+      window.dataLayer.push({
+        event: "thank_you_page_view",
+        page_path: window.location.pathname,
+      });
+    }
+
+    // This is intentional for Meta Pixel funnel tracking - it needs both events
+    trackMetaEvent("Lead", { page: "thank_you" });
   }, []);
 
   return (

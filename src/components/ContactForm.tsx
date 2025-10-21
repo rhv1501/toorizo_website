@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { submitContactForm } from "@/services/formService";
 import { toast } from "sonner";
-import { trackConversion, trackMetaEvent } from "@/utils/gtm";
+import { trackContactSubmitClickConversion, trackMetaEvent } from "@/utils/gtm";
 
 const ContactForm = () => {
   const [searchParams] = useSearchParams();
@@ -124,9 +124,9 @@ const ContactForm = () => {
         message: `${formData.subject}: ${formData.message}`,
       });
 
-      // GTM event for contact form submission
-      if (typeof window !== "undefined" && (window as any).dataLayer) {
-        (window as any).dataLayer.push({
+      // GTM event for contact form submission (for analytics)
+      if (typeof window !== "undefined" && window.dataLayer) {
+        window.dataLayer.push({
           event: "contact_form_submit",
           name: formData.name,
           email: formData.email,
@@ -134,10 +134,8 @@ const ContactForm = () => {
         });
       }
 
-      // Track Google Ads conversion
-      trackConversion();
-
-      // Meta Pixel event
+      // Meta Pixel event - fires once on form submission
+      // We track Lead on submit, and another Lead event will be tracked on ThankYouPage load
       trackMetaEvent("Lead", { form: "contact" });
 
       setIsSubmitted(true);
@@ -342,6 +340,15 @@ const ContactForm = () => {
             <button
               type="submit"
               disabled={isSubmitting || !isFormValid}
+              onClick={() => {
+                // Track Google Ads click conversion when user clicks submit
+                // This runs BEFORE form validation/submission to track intent
+                try {
+                  trackContactSubmitClickConversion();
+                } catch (e) {
+                  console.warn("Conversion click tracking failed", e);
+                }
+              }}
               className={`w-full md:w-auto py-3 px-6 rounded-md font-medium transition-all duration-300 uppercase tracking-wider text-sm 
                 ${
                   isSubmitting || !isFormValid
