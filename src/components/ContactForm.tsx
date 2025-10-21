@@ -2,7 +2,9 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { submitContactForm } from "@/services/formService";
 import { toast } from "sonner";
-import { trackContactSubmitClickConversion, trackMetaEvent } from "@/utils/gtm";
+import {
+  /* trackContactSubmitClickConversion, */ trackMetaEvent,
+} from "@/utils/gtm";
 
 const ContactForm = () => {
   const [searchParams] = useSearchParams();
@@ -344,11 +346,14 @@ const ContactForm = () => {
               onClick={() => {
                 // Track Google Ads click conversion when user clicks submit
                 // This runs BEFORE form validation/submission to track intent
+                // Conversion tracking temporarily disabled
+                /*
                 try {
                   trackContactSubmitClickConversion();
                 } catch (e) {
                   console.warn("Conversion click tracking failed", e);
                 }
+                */
               }}
               className={`w-full md:w-auto py-3 px-6 rounded-md font-medium transition-all duration-300 uppercase tracking-wider text-sm 
                 ${
