@@ -28,6 +28,8 @@ export interface JourneyFormData {
 // You will need to deploy a Google Apps Script Web App as a middleware
 const GOOGLE_SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzXhIpsNvXsR-jj9GAyp7Re-j-6UxO56QXzDpGi_EOBHgX6kfQII3CKxIFVhSLkmR9y/exec';
 
+import { formatTimestampForSheet } from "@/lib/utils";
+
 /**
  * Submit contact form data to Google Sheets
  * @param data Contact form data
@@ -42,7 +44,7 @@ export const submitContactForm = async (data: ContactFormData) => {
     formData.append('phone', data.phone);
     formData.append('people', data.people.toString());
     formData.append('message', data.message);
-    formData.append('timestamp', new Date().toISOString());
+  formData.append('timestamp', formatTimestampForSheet(new Date()));
 
     const response = await fetch(GOOGLE_SHEET_API_URL, {
       method: 'POST',
@@ -72,7 +74,7 @@ export const submitChatMessage = async (data: ChatMessageData) => {
     formData.append('name', data.name || '');
     formData.append('email', data.email || '');
     formData.append('message', data.message);
-    formData.append('timestamp', new Date().toISOString());
+  formData.append('timestamp', formatTimestampForSheet(new Date()));
 
     const response = await fetch(GOOGLE_SHEET_API_URL, {
       method: 'POST',
@@ -108,7 +110,7 @@ export const submitJourneyForm = async (data: JourneyFormData) => {
     formData.append('travelers', data.travelers.toString());
     formData.append('budget', data.budget);
     formData.append('preferences', data.preferences);
-    formData.append('timestamp', new Date().toISOString());
+  formData.append('timestamp', formatTimestampForSheet(new Date()));
 
     const response = await fetch(GOOGLE_SHEET_API_URL, {
       method: 'POST',
