@@ -30,7 +30,24 @@ const ContactForm = () => {
     const destination = searchParams.get("destination");
     const packageType = searchParams.get("package");
     const inquiry = searchParams.get("inquiry");
+    const prefilledMessage = searchParams.get("message");
 
+    // Handle prefilled message directly (for cab bookings, etc.)
+    if (prefilledMessage) {
+      let subjectValue = "booking-inquiry";
+      if (inquiry === "cab-booking") {
+        subjectValue = "cab-services";
+      }
+
+      setFormData((prev) => ({
+        ...prev,
+        message: prefilledMessage,
+        subject: subjectValue,
+      }));
+      return;
+    }
+
+    // Handle other types of inquiries
     if (destination || packageType) {
       let message = "";
 

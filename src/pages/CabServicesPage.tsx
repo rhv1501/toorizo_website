@@ -2,6 +2,8 @@ import { useState } from "react";
 import Layout from "../components/Layout";
 import HeroVideo from "../components/HeroVideo";
 import SectionTitle from "../components/SectionTitle";
+import CabBookingModal from "../components/CabBookingModal";
+import CabBookingForm from "../components/CabBookingForm";
 import { Tab } from "@headlessui/react";
 import { useNavigate, Link } from "react-router-dom";
 import {
@@ -14,16 +16,34 @@ import {
   PlaneTakeoff,
 } from "lucide-react";
 
+interface BookingData {
+  tripType: "one-way" | "round-trip";
+  from: string;
+  to: string;
+  date: string;
+  time: string;
+  days?: string;
+}
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 const CabServicesPage = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [currentBookingData, setCurrentBookingData] =
+    useState<BookingData | null>(null);
   const navigate = useNavigate();
 
+  const handleVehicleSelection = (bookingData: BookingData) => {
+    setCurrentBookingData(bookingData);
+    setIsBookingModalOpen(true);
+  };
+
   const heroTitle = "Premium Transportation Services";
-  const heroSubtitle = "Travel in comfort and style with our luxury cab services";
+  const heroSubtitle =
+    "Travel in comfort and style with our luxury cab services";
   const cabVideo = "/Cab.mp4";
 
   const categories = [
@@ -32,7 +52,8 @@ const CabServicesPage = () => {
       icon: <Plane className="h-5 w-5" />,
       description:
         "Hassle-free pickup and drop services to and from airports across South India.",
-      image: "https://images.pexels.com/photos/730778/pexels-photo-730778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      image:
+        "https://images.pexels.com/photos/730778/pexels-photo-730778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       features: [
         "Meet and greet service at airport arrivals",
         "Assistance with luggage handling",
@@ -47,7 +68,8 @@ const CabServicesPage = () => {
       icon: <Landmark className="h-5 w-5" />,
       description:
         "Guided tours to explore the beautiful sights and destinations across South India.",
-      image: "https://images.pexels.com/photos/31719930/pexels-photo-31719930/free-photo-of-scenic-lake-view-with-cherry-blossoms-and-boats.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      image:
+        "https://images.pexels.com/photos/31719930/pexels-photo-31719930/free-photo-of-scenic-lake-view-with-cherry-blossoms-and-boats.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       features: [
         "Customizable itineraries based on your interests",
         "Professional drivers with local knowledge",
@@ -118,6 +140,23 @@ const CabServicesPage = () => {
         fullHeight={false}
       />
 
+      {/* Compact Cab Booking Section - Right after hero */}
+      <section className="py-8 bg-gradient-to-r from-toorizo-gold/5 to-toorizo-cream/50">
+        <div className="toorizo-container">
+          <div className="text-center mb-6">
+            <h3 className="text-xl font-playfair text-toorizo-dark mb-2">
+              Quick Cab Booking
+            </h3>
+            <p className="text-sm text-gray-600">
+              Book your cab in just a few steps
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <CabBookingForm onVehicleSelect={handleVehicleSelection} />
+          </div>
+        </div>
+      </section>
+
       <section className="section-padding toorizo-container">
         <SectionTitle>Our Cab Services</SectionTitle>
         <p className="text-center text-gray-600 max-w-3xl mx-auto mb-12">
@@ -182,7 +221,9 @@ const CabServicesPage = () => {
                       <h3 className="text-2xl font-playfair text-toorizo-dark mb-3">
                         {category.name}
                       </h3>
-                      <p className="text-gray-600 mb-6">{category.description}</p>
+                      <p className="text-gray-600 mb-6">
+                        {category.description}
+                      </p>
                       <h4 className="font-medium text-toorizo-dark mb-3">
                         Features:
                       </h4>
@@ -224,7 +265,8 @@ const CabServicesPage = () => {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[ // economy, suv, luxury
+            {[
+              // economy, suv, luxury
               {
                 src: "https://images.pexels.com/photos/117538/pexels-photo-117538.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
                 alt: "Economy Car",
@@ -264,9 +306,7 @@ const CabServicesPage = () => {
                   <h3 className="text-xl font-playfair text-toorizo-dark mb-2">
                     {car.title}
                   </h3>
-                  <p className="text-gray-600">
-                    {car.desc}
-                  </p>
+                  <p className="text-gray-600">{car.desc}</p>
                 </div>
               </div>
             ))}
@@ -293,6 +333,13 @@ const CabServicesPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Cab Booking Modal */}
+      <CabBookingModal
+        open={isBookingModalOpen}
+        onOpenChange={setIsBookingModalOpen}
+        bookingData={currentBookingData}
+      />
     </Layout>
   );
 };
