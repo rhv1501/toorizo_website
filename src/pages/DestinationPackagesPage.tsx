@@ -176,14 +176,12 @@ const DestinationPackagesPage = () => {
         "Couples spa treatment",
         "Private sightseeing tours",
         "Flower bed decoration",
-        "Complimentary cake & wine",
-        "Professional couple photoshoot",
+        "Complimentary cake",
       ],
       inclusions: [
-        "Luxury accommodation with valley/mountain view",
+        "Luxury accommodation with valley/mountain view (Based on Availability)",
         "Daily breakfast & one romantic dinner",
         "Private cab for sightseeing",
-        "All applicable taxes",
       ],
       color: "bg-pink-50 border-pink-200 hover:bg-pink-100",
     },
@@ -194,18 +192,14 @@ const DestinationPackagesPage = () => {
       description: `Perfect family vacation to explore ${currentDestination.name} together`,
       imageSrc: "/Packages/Family.jpeg",
       features: [
-        "Family-friendly accommodations",
         "Kid-friendly activity planning",
-        "Flexible meal timings",
-        "Safety measures & first aid",
         "Educational tour guides",
         "Family game activities",
       ],
       inclusions: [
+        "Family-friendly accommodations",
         "Comfortable family rooms/suites",
-        "Daily breakfast & lunch",
-        "Shared cab for group sightseeing",
-        "Entry fees to major attractions",
+        "Daily breakfast",
       ],
       color: "bg-blue-50 border-blue-200 hover:bg-blue-100",
     },
@@ -215,15 +209,10 @@ const DestinationPackagesPage = () => {
       icon: <Car className="h-6 w-6" />,
       description: `Special group rates for ${currentDestination.name} with customized itineraries`,
       imageSrc: "/Packages/private group.jpeg",
-      features: [
-        "Group discount up to 20%",
-        "Dedicated tour coordinator",
-        "Customizable itinerary",
-        "Group photography sessions",
-        "Team building activities",
-        "Welcome & farewell party",
-      ],
+      features: [],
       inclusions: [
+        "Group discount up to 20%",
+        "Customizable itinerary",
         "Budget to premium accommodation options",
         "Group meal arrangements",
         "Private bus/tempo traveler",
@@ -257,10 +246,6 @@ const DestinationPackagesPage = () => {
       <section className="section-padding bg-toorizo-cream">
         <div className="toorizo-container">
           <SectionTitle>Available Packages</SectionTitle>
-          {/* Trust Indicators */}
-          <div className="mb-4">
-            <TrustIndicators background="bg-white/50" />
-          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {packages.map((pkg) => {
               const packageLink = `/contact-us?destination=${encodeURIComponent(
@@ -330,6 +315,10 @@ const DestinationPackagesPage = () => {
                 </div>
               );
             })}
+          </div>
+          {/* Trust Indicators */}
+          <div className="mt-4">
+            <TrustIndicators background="bg-white/50" />
           </div>
         </div>
       </section>
@@ -407,7 +396,7 @@ const DestinationPackagesPage = () => {
                 <p className="text-gray-600">{selectedPackage.description}</p>
                 <div className="mt-6">
                   <h4 className="font-semibold mb-3 text-lg">
-                    Package Features:
+                    Additional Features (Based on Availability):
                   </h4>
                   <ul className="space-y-2 mb-6">
                     {selectedPackage.features.map(
