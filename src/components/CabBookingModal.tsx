@@ -6,7 +6,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
-import { Car, Users } from "lucide-react";
 
 type TripType = "one-way" | "round-trip";
 type VehicleType = "hatchback" | "sedan" | "suv" | "muv" | "custom";
@@ -26,39 +25,38 @@ interface CabBookingModalProps {
   bookingData: BookingData | null;
 }
 
-const vehicleOptions = [
+const vehicleOptions: Array<{
+  type: VehicleType;
+  name: string;
+  image: string;
+  capacity: string;
+  description: string;
+}> = [
   {
-    type: "hatchback" as VehicleType,
-    name: "Hatchback",
-    icon: Car,
-    capacity: "4 passengers",
-    description: "Compact and economical",
-  },
-  {
-    type: "sedan" as VehicleType,
+    type: "sedan",
     name: "Sedan",
-    icon: Car,
+    image: "/swift-dzire.webp",
     capacity: "4 passengers",
     description: "Comfortable and spacious",
   },
   {
-    type: "suv" as VehicleType,
+    type: "suv",
     name: "SUV",
-    icon: Car,
+    image: "/suv.webp",
     capacity: "6-7 passengers",
     description: "Premium and powerful",
   },
   {
-    type: "muv" as VehicleType,
+    type: "muv",
     name: "MUV",
-    icon: Car,
+    image: "/muv.webp",
     capacity: "7-8 passengers",
     description: "Multi-utility vehicle",
   },
   {
-    type: "custom" as VehicleType,
+    type: "custom",
     name: "Custom",
-    icon: Users,
+    image: "/tempo.webp",
     capacity: "Large groups",
     description: "For larger groups",
   },
@@ -71,16 +69,15 @@ const CabBookingModal = ({
 }: CabBookingModalProps) => {
   const navigate = useNavigate();
 
-  const handleClose = () => {
-    onOpenChange(false);
-  };
+  const handleClose = () => onOpenChange(false);
 
   const handleVehicleSelect = (vehicle: VehicleType) => {
     if (!bookingData) return;
 
-    const finalData = { ...bookingData, vehicle };
+    const finalData = { ...bookingData, vehicle } as BookingData & {
+      vehicle: VehicleType;
+    };
 
-    // Create prefilled message for contact form
     let message = `I would like to book a ${finalData.tripType} cab service.\n\n`;
     message += `Details:\n`;
     message += `• Trip Type: ${
@@ -90,22 +87,15 @@ const CabBookingModal = ({
     message += `• To: ${finalData.to}\n`;
     message += `• Date: ${finalData.date}\n`;
     message += `• Time: ${finalData.time}\n`;
-
     if (finalData.tripType === "round-trip" && finalData.days) {
       message += `• Duration: ${finalData.days} days\n`;
     }
-
     message += `• Vehicle Type: ${
       vehicleOptions.find((v) => v.type === finalData.vehicle)?.name
     }\n\n`;
     message += `Please provide me with availability and pricing details.`;
 
-    // Navigate to contact page with prefilled data
-    const params = new URLSearchParams({
-      inquiry: "cab-booking",
-      message: message,
-    });
-
+    const params = new URLSearchParams({ inquiry: "cab-booking", message });
     handleClose();
     navigate(`/contact-us?${params.toString()}`);
   };
@@ -155,31 +145,37 @@ const CabBookingModal = ({
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {vehicleOptions.map((vehicle) => {
-                const Icon = vehicle.icon;
-                return (
-                  <Card
-                    key={vehicle.type}
-                    className="cursor-pointer border-2 hover:border-toorizo-gold transition-all duration-300 hover:shadow-lg"
-                    onClick={() => handleVehicleSelect(vehicle.type)}
-                  >
-                    <CardContent className="p-4 text-center">
-                      <div className="w-12 h-12 bg-toorizo-gold/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <Icon className="w-6 h-6 text-toorizo-gold" />
-                      </div>
-                      <h4 className="font-semibold text-toorizo-dark mb-1">
-                        {vehicle.name}
-                      </h4>
-                      <p className="text-sm text-toorizo-gold font-medium mb-1">
-                        {vehicle.capacity}
-                      </p>
-                      <p className="text-xs text-gray-600">
-                        {vehicle.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+              {vehicleOptions.map((vehicle) => (
+                <Card
+                  key={vehicle.type}
+                  className="cursor-pointer border-2 hover:border-toorizo-gold transition-all duration-300 hover:shadow-lg"
+                  onClick={() => handleVehicleSelect(vehicle.type)}
+                >
+                  <CardContent className="p-4 text-center">
+                    <div className="w-36 md:w-44 lg:w-56 h-28 md:h-32 lg:h-36 bg-toorizo-gold/10 rounded-lg flex items-center justify-center mx-auto mb-3 overflow-hidden">
+                      <img
+                        src={vehicle.image}
+                        alt={vehicle.name}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src =
+                            "/placeholder.svg";
+                        }}
+                      />
+                    </div>
+                    <h4 className="font-semibold text-toorizo-dark mb-1">
+                      {vehicle.name}
+                    </h4>
+                    <p className="text-sm text-toorizo-gold font-medium mb-1">
+                      {vehicle.capacity}
+                    </p>
+                    <p className="text-xs text-gray-600">
+                      {vehicle.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
 
             <div className="text-center text-sm text-gray-600 bg-gray-50 p-4 rounded-lg mt-6">
