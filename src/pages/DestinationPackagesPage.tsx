@@ -169,19 +169,21 @@ const DestinationPackagesPage = () => {
       id: "honeymoon",
       title: "Couple/Honeymoon Package",
       icon: <Heart className="h-6 w-6" />,
-      description: `Romantic ${currentDestination.name} getaway designed for couples`,
+      description: `Premium couple getaway in ${currentDestination.name} with personalized experiences and complete comfort`,
       imageSrc: "/Packages/couple.jpeg",
       features: [
-        "Romantic candlelight dinner",
-        "Couples spa treatment",
-        "Private sightseeing tours",
-        "Flower bed decoration",
-        "Complimentary cake",
+        "Romantic bed decoration setup",
+        "Private candlelight dinner experience",
+        "Luxury flower bed decoration",
+        "Room & stay upgrades (valley view / luxury properties)",
       ],
       inclusions: [
-        "Luxury accommodation with valley/mountain view (Based on Availability)",
-        "Daily breakfast & one romantic dinner",
-        "Private cab for sightseeing",
+        "Premium driver cum guide with expert local sightseeing knowledge",
+        "Handpicked premium stays (transparent hotel names provided before booking)",
+        "Fully customisable itinerary based on your preferences",
+        "Complimentary toy train ticket experience",
+        "Daily complimentary breakfast",
+        "Private cab for complete sightseeing",
       ],
       color: "bg-pink-50 border-pink-200 hover:bg-pink-100",
     },
@@ -189,17 +191,21 @@ const DestinationPackagesPage = () => {
       id: "family",
       title: "Family Package",
       icon: <Users className="h-6 w-6" />,
-      description: `Perfect family vacation to explore ${currentDestination.name} together`,
+      description: `Comfort-first ${currentDestination.name} family getaway with flexible plans for all age groups`,
       imageSrc: "/Packages/Family.jpeg",
       features: [
-        "Kid-friendly activity planning",
-        "Educational tour guides",
-        "Family game activities",
+        "Extra bed arrangements for kids/adults",
+        "Room upgrades (valley view / premium family rooms)",
+        "Activity add-ons (adventure parks, local experiences, etc.)",
+        "Special occasion arrangements (birthdays / anniversaries)",
       ],
       inclusions: [
-        "Family-friendly accommodations",
-        "Comfortable family rooms/suites",
-        "Daily breakfast",
+        "Experienced driver with strong local sightseeing knowledge",
+        "Verified & comfortable family-friendly stays (hotel names shared before booking)",
+        "Fully customisable itinerary based on family preferences",
+        "Complimentary toy train ticket experience",
+        "Daily complimentary breakfast",
+        "Private cab for complete sightseeing",
       ],
       color: "bg-blue-50 border-blue-200 hover:bg-blue-100",
     },
@@ -207,16 +213,21 @@ const DestinationPackagesPage = () => {
       id: "group",
       title: "Group Package (10+ People)",
       icon: <Car className="h-6 w-6" />,
-      description: `Special group rates for ${currentDestination.name} with customized itineraries`,
+      description: `Comfortable ${currentDestination.name} group travel with a flexible pace and seamless transfers`,
       imageSrc: "/Packages/private group.jpeg",
-      features: [],
+      features: [
+        "Larger / upgraded vehicle options for extra comfort",
+        "Room upgrades (valley view / premium properties)",
+        "Bonfire & group dinner experiences",
+        "Adventure & activity add-ons (trekking, boating, etc.)",
+      ],
       inclusions: [
-        "Group discount up to 20%",
-        "Customizable itinerary",
-        "Budget to premium accommodation options",
-        "Group meal arrangements",
-        "Private bus/tempo traveler",
-        "Professional tour guide",
+        "Dedicated driver with strong local sightseeing knowledge",
+        "Comfortable, well-rated stays (hotel names shared before booking)",
+        "Fully customisable itinerary tailored to your group's pace",
+        "Complimentary toy train ticket experience",
+        "Daily complimentary breakfast",
+        "Private vehicle for complete sightseeing & transfers",
       ],
       color: "bg-green-50 border-green-200 hover:bg-green-100",
     },
@@ -396,7 +407,11 @@ const DestinationPackagesPage = () => {
                 <p className="text-gray-600">{selectedPackage.description}</p>
                 <div className="mt-6">
                   <h4 className="font-semibold mb-3 text-lg">
-                    Additional Features (Based on Availability):
+                    {selectedPackage.id === "honeymoon" ||
+                    selectedPackage.id === "family" ||
+                    selectedPackage.id === "group"
+                      ? "Enhancements (Available at Additional Cost):"
+                      : "Additional Features (Based on Availability):"}
                   </h4>
                   <ul className="space-y-2 mb-6">
                     {selectedPackage.features.map(
