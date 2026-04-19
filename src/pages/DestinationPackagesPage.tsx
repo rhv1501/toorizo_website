@@ -260,7 +260,7 @@ const DestinationPackagesPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {packages.map((pkg) => {
               const packageLink = `/contact-us?destination=${encodeURIComponent(
-                currentDestination.fullName
+                currentDestination.fullName,
               )}&package=${encodeURIComponent(pkg.title)}`;
 
               return (
@@ -371,7 +371,7 @@ const DestinationPackagesPage = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to={`/contact-us?destination=${encodeURIComponent(
-                  currentDestination.fullName
+                  currentDestination.fullName,
                 )}&package=Custom Package&inquiry=custom`}
                 className="btn-primary"
               >
@@ -423,7 +423,7 @@ const DestinationPackagesPage = () => {
                           <Star className="h-4 w-4 text-toorizo-gold mr-2 mt-1 flex-shrink-0" />
                           {feature}
                         </li>
-                      )
+                      ),
                     )}
                   </ul>
 
@@ -442,7 +442,7 @@ const DestinationPackagesPage = () => {
                             <Check className="h-4 w-4 text-toorizo-gold mr-2 mt-1 flex-shrink-0" />
                             {inclusion}
                           </li>
-                        )
+                        ),
                       )}
                     </ul>
                   </div>
@@ -454,7 +454,7 @@ const DestinationPackagesPage = () => {
                   </p>
                   <Link
                     to={`/contact-us?destination=${encodeURIComponent(
-                      currentDestination.fullName
+                      currentDestination.fullName,
                     )}&package=${encodeURIComponent(selectedPackage.title)}`}
                     className="w-full bg-toorizo-gold text-white py-3 px-6 rounded-lg font-medium text-center hover:bg-toorizo-gold/90 transition-colors duration-300 block"
                   >
