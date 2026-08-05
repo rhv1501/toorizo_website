@@ -178,7 +178,7 @@ const DestinationPackagesPage = () => {
         "Room & stay upgrades (valley view / luxury properties)",
       ],
       inclusions: [
-        "Premium driver cum guide with expert local sightseeing knowledge",
+        "Premium driver kum guide with expert local sightseeing knowledge",
         "Handpicked premium stays (transparent hotel names provided before booking)",
         "Fully customisable itinerary based on your preferences",
         "Complimentary toy train ticket experience",

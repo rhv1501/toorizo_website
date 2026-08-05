@@ -187,7 +187,7 @@ const Header = () => {
       </button>
 
       {/* Floating Contact Button */}
-      <FloatingContactButton />
+      {location.pathname !== "/cab-services" && <FloatingContactButton />}
 
       <LoginModal
         open={showLoginModal}

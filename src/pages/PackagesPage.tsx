@@ -58,7 +58,7 @@ const PackagesPage = () => {
       description:
         "Premium couple getaways with personalized itineraries, private sightseeing, and handpicked stays",
       features: [
-        "Premium driver cum guide with local sightseeing expertise",
+        "Premium driver kum guide with local sightseeing expertise",
         "Handpicked premium stays with transparent hotel details",
         "Complimentary toy train ticket experience",
         "Daily complimentary breakfast",
